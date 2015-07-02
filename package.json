@@ -1,0 +1,26 @@
+{
+  "name": "react-view-store",
+  "version": "0.1.0",
+  "description": "React view isomorph with socket.io for sailsjs ",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register test.js"
+  },
+  "keywords": [
+    "sails",
+    "react",
+    "isomorph",
+    "socket.io"
+  ],
+  "author": "wi2",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.6.14",
+    "react": "^0.13.2"
+  },
+  "devDependencies": {
+    "babel-core": "^5.6.15",
+    "jsdom": "^5.5.0",
+    "mocha": "^2.2.5",
+    "node-jsdom": "^3.1.5"
+  }
+}
