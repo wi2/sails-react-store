@@ -2,6 +2,7 @@
 Sails React
 
 ## Installation
+You need sais.io.socket and sails-hook-babel
 
 ```sh
 $ npm install sails-react-store sails-hook-babel --save
