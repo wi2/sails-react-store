@@ -3,6 +3,7 @@ import {ReactBase} from './base.jsx'
 import {StoreItem} from 'sails-store'
 
 export class ReactItem extends ReactBase {
+
   componentDidMount() {
     var item = this.props.item;
     this.store = new StoreItem({
@@ -28,3 +29,6 @@ export class ReactItem extends ReactBase {
     )
   }
 }
+
+ReactItem.propTypes = { item: React.PropTypes.object };
+ReactItem.defaultProps = { buttons: [] };

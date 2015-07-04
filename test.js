@@ -18,17 +18,20 @@ var Collection = require('./index.js').ReactCollection;
 describe('The reactItemButton component', function() {
 
   describe('when no props are given', function() {
-    var component, itemComponent, collectionComponent;
+    var hello, post, comment, collectionComponent;
 
-    beforeEach(function(done) {
-      component = TestUtils.renderIntoDocument(
-        <ItemButton icon={{name:'test'}} />
+    before(function(done) {
+      hello = TestUtils.renderIntoDocument(
+        <ItemButton icon={{name:'Hello'}} />
       );
-      itemComponent = TestUtils.renderIntoDocument(
-        <Item item={{message:'yep',name:'test'}} buttons  ={[]} />
+      post = TestUtils.renderIntoDocument(
+        <Item item={{id:1, name: 'Bonjour'}} identity="post" />
+      );
+      comment = TestUtils.renderIntoDocument(
+        <Item item={{message:'a comment',name:'Mike'}} buttons  ={[]} />
       );
       collectionComponent = TestUtils.renderIntoDocument(
-        <Collection />
+        <Collection identity="post" />
       );
       done()
     });
@@ -38,15 +41,19 @@ describe('The reactItemButton component', function() {
       setTimeout(done);
     });
 
-    it('should have a textContent of "test"', function() {
-      // console.log(component);
-      var name = React.findDOMNode(component).textContent;
-      assert.equal(name, 'test');
+    it('should have a textContent of "Hello"', function() {
+      var name = React.findDOMNode(hello).textContent;
+      assert.equal(name, 'Hello');
     });
-    it('should have a textContent of "yeptest"', function() {
-      // console.log(component);
-      var name = React.findDOMNode(itemComponent).textContent;
-      assert.equal(name, 'yeptest');
+
+    it('should have a textContent of "Bonjour"', function() {
+      var name = React.findDOMNode(post).textContent;
+      assert.equal(name, 'Bonjour');
+    });
+
+    it('should have a textContent of "a commentMike"', function() {
+      var name = React.findDOMNode(comment).textContent;
+      assert.equal(name, 'a commentMike');
     });
 
   });

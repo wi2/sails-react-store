@@ -1,6 +1,6 @@
 {
-  "name": "react-view-store",
-  "version": "0.1.0",
+  "name": "sails-react-store",
+  "version": "0.1.2",
   "description": "React view isomorph with socket.io for sailsjs ",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register test.js"
@@ -22,5 +22,9 @@
     "jsdom": "^5.5.0",
     "mocha": "^2.2.5",
     "node-jsdom": "^3.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wi2/sails-react-store.git"
   }
 }
