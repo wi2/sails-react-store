@@ -1,6 +1,6 @@
 import React from 'react'
-import {ReactBase} from './base.jsx'
-import {ReactItem} from './collection-item.jsx'
+import {ReactBase} from './base.js'
+import {ReactItem} from './collection-item.js'
 import {StoreCollection} from 'sails-store'
 
 export class ReactCollection extends ReactBase {

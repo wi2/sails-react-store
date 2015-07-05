@@ -1,5 +1,5 @@
 import React from 'react'
-import {ReactBase} from './base.jsx'
+import {ReactBase} from './base.js'
 
 export class ReactItemButton extends ReactBase {
   constructor(props) {

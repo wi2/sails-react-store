@@ -1,5 +1,5 @@
 import React from 'react'
-import {ReactBase} from './base.jsx'
+import {ReactBase} from './base.js'
 import {StoreItem} from 'sails-store'
 
 export class ReactItem extends ReactBase {
