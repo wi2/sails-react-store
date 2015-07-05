@@ -34,13 +34,25 @@ var ReactItem = (function (_ReactBase) {
   _createClass(ReactItem, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var item = this.props.item;
+      var item = this.props.item || this.props.params;
       this.store = new _sailsStore.StoreItem({
         identity: this.identity,
         value: item,
         store: this.props.store
       });
       this.store.on('update', this.update.bind(this));
+      if (!item.createdAt) {
+        this.store.get();
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      if (this.props.params) {
+        this.store.init(this.props.params);
+        delete this.props.params;
+        this.store.get();
+      }
     }
   }, {
     key: 'update',
