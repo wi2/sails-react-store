@@ -32,7 +32,7 @@ export class ReactItem extends ReactBase {
       <li className="{identity}-item">
         <p>{this.props.item.message}</p>
         <small>{this.props.item.name}</small>
-        {this.props.buttons.map((function(icon,i) {
+        {this.props.buttons.map(( (icon,i) => {
           return <ReactItemButton key={i} icon={icon} id={this.props.item.id} />;
         }).bind(this))}
       </li>

@@ -63,6 +63,8 @@ var ReactItem = (function (_ReactBase) {
   }, {
     key: 'render',
     value: function render() {
+      var _this = this;
+
       return _react2['default'].createElement(
         'li',
         { className: '{identity}-item' },
@@ -77,7 +79,7 @@ var ReactItem = (function (_ReactBase) {
           this.props.item.name
         ),
         this.props.buttons.map((function (icon, i) {
-          return _react2['default'].createElement(ReactItemButton, { key: i, icon: icon, id: this.props.item.id });
+          return _react2['default'].createElement(ReactItemButton, { key: i, icon: icon, id: _this.props.item.id });
         }).bind(this))
       );
     }

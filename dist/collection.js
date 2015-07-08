@@ -60,12 +60,14 @@ var ReactCollection = (function (_ReactBase) {
   }, {
     key: 'render',
     value: function render() {
+      var _this = this;
+
       var Item = this.reactItem || _collectionItemJs.ReactItem;
       return _react2['default'].createElement(
         'ul',
         { className: '{identity}-list' },
         this.state.items.map((function (item, i) {
-          return _react2['default'].createElement(Item, { identity: this.props.identity, key: i, item: item, buttons: this.buttons, store: this.store });
+          return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.buttons, store: _this.store });
         }).bind(this))
       );
     }
