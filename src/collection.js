@@ -6,14 +6,15 @@ import {StoreCollection} from 'sails-store'
 export class ReactCollection extends ReactBase {
   constructor(props) {
     super(props);
-    this.store = new StoreCollection({
-      identity: this.identity
-    });
     //
     this.state = {items: []}
     this.buttons = [];
   }
   componentDidMount() {
+    this.store = new StoreCollection({
+      identity: this.identity
+    });
+    //
     if (!this.props.items) {
       this.store.get();
     } else {

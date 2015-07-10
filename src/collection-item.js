@@ -9,7 +9,7 @@ export class ReactItem extends ReactBase {
     this.store = new StoreItem({
       identity: this.identity,
       value: item,
-      store: this.props.store
+      belongs: this.props.belongs
     });
     this.store.on('update', this.update.bind(this));
     if (!item.createdAt) {

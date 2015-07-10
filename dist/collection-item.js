@@ -38,7 +38,7 @@ var ReactItem = (function (_ReactBase) {
       this.store = new _sailsStore.StoreItem({
         identity: this.identity,
         value: item,
-        store: this.props.store
+        belongs: this.props.belongs
       });
       this.store.on('update', this.update.bind(this));
       if (!item.createdAt) {

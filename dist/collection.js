@@ -29,9 +29,6 @@ var ReactCollection = (function (_ReactBase) {
     _classCallCheck(this, ReactCollection);
 
     _get(Object.getPrototypeOf(ReactCollection.prototype), 'constructor', this).call(this, props);
-    this.store = new _sailsStore.StoreCollection({
-      identity: this.identity
-    });
     //
     this.state = { items: [] };
     this.buttons = [];
@@ -42,6 +39,10 @@ var ReactCollection = (function (_ReactBase) {
   _createClass(ReactCollection, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.store = new _sailsStore.StoreCollection({
+        identity: this.identity
+      });
+      //
       if (!this.props.items) {
         this.store.get();
       } else {
