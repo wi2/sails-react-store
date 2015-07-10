@@ -35,7 +35,7 @@ export class PostCollection extends ReactItem {
             identity={this.props.identity}
             key={i}
             item={item}
-            store={this.store} />;
+            belongs={this.store} />;
         }).bind(this))}
       </div>
     )
