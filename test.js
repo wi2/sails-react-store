@@ -30,8 +30,16 @@ describe('The reactItemButton component', function() {
       comment = TestUtils.renderIntoDocument(
         <Item item={{message:'a comment',name:'Mike'}} buttons  ={[]} />
       );
+
+      var items = [
+        {id: 1, name:"John"},
+        {id: 2, name:"Paul"},
+        {id: 3, name:"Mike"},
+        {id: 4, name:"Lee"},
+        {id: 5, name:"Mary"}
+      ];
       collectionComponent = TestUtils.renderIntoDocument(
-        <Collection identity="post" />
+        <Collection identity="post" items={items} />
       );
       done()
     });
@@ -54,6 +62,11 @@ describe('The reactItemButton component', function() {
     it('should have a textContent of "a commentMike"', function() {
       var name = React.findDOMNode(comment).textContent;
       assert.equal(name, 'a commentMike');
+    });
+
+    it('should have a textContent of "JohnPaulMikeLeeMary"', function() {
+      var name = React.findDOMNode(collectionComponent).textContent;
+      assert.equal(name, 'JohnPaulMikeLeeMary');
     });
 
   });

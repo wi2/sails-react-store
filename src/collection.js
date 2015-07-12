@@ -32,9 +32,9 @@ export class ReactCollection extends ReactBase {
     var Item = this.reactItem||ReactItem;
     return (
       <ul className="{identity}-list">
-        {this.state.items.map(( (item,i) => {
-          return <Item identity={this.props.identity} key={i} item={item} buttons={this.buttons} store={this.store} />;
-        }).bind(this))}
+        {this.bindmap(this.state.items, (item,i) => {
+          return <Item identity={this.props.identity} key={i} item={item} buttons={this.buttons} belongs={this.belongs} />;
+        })}
       </ul>
     )
   }

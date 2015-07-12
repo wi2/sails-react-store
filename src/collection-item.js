@@ -12,9 +12,8 @@ export class ReactItem extends ReactBase {
       belongs: this.props.belongs
     });
     this.store.on('update', this.update.bind(this));
-    if (!item.createdAt) {
+    if (!item.createdAt)
       this.store.get();
-    }
   }
   componentDidUpdate() {
     if (this.props.params){

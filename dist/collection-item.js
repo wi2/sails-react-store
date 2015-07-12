@@ -41,9 +41,7 @@ var ReactItem = (function (_ReactBase) {
         belongs: this.props.belongs
       });
       this.store.on('update', this.update.bind(this));
-      if (!item.createdAt) {
-        this.store.get();
-      }
+      if (!item.createdAt) this.store.get();
     }
   }, {
     key: 'componentDidUpdate',

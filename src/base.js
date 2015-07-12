@@ -5,4 +5,8 @@ export class ReactBase extends React.Component {
     super(props);
     this.identity = props.identity;
   }
+
+  bindmap(items, fn) {
+    return items.map(fn.bind(this));
+  }
 }
