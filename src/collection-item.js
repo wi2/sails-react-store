@@ -6,18 +6,21 @@ export class ReactItem extends ReactBase {
 
   componentDidMount() {
     let item = this.props.item||this.props.params;
-    this.store = new StoreItem({
-      identity: this.identity,
-      value: item,
-      belongs: this.props.belongs
-    });
+    if (!this.store)
+      this.store = new StoreItem({
+        identity: this.identity,
+        value: item,
+        belongs: this.props.belongs
+      });
+    else
+      this.store.startListening();
     this.store.on('update', this.update.bind(this));
     if (!item.createdAt)
       this.store.get();
   }
   componentDidUpdate() {
     if (this.props.params){
-      this.store.init(this.props.params);
+      this.store.setItems(this.props.params);
       delete this.props.params;
       this.store.get();
     }

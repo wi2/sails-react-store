@@ -18,7 +18,7 @@ export class ReactCollection extends ReactBase {
     if (!this.props.items) {
       this.store.get();
     } else {
-      this.store.init(this.props.items)
+      this.store.setItems(this.props.items)
       this.setState({items: this.props.items});
     }
     this.store.on('add', this.update.bind(this));

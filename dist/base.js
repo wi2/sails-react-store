@@ -29,6 +29,11 @@ var ReactBase = (function (_React$Component) {
   _inherits(ReactBase, _React$Component);
 
   _createClass(ReactBase, [{
+    key: 'componentDidUnmount',
+    value: function componentDidUnmount() {
+      this.store.stopListening();
+    }
+  }, {
     key: 'bindmap',
     value: function bindmap(items, fn) {
       return items.map(fn.bind(this));
