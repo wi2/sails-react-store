@@ -76,9 +76,9 @@ var ReactItem = (function (_ReactBase) {
           null,
           this.props.item.name
         ),
-        this.props.buttons.map((function (icon, i) {
+        this.bindmap(this.props.buttons, function (icon, i) {
           return _react2['default'].createElement(ReactItemButton, { key: i, icon: icon, id: _this.props.item.id });
-        }).bind(this))
+        })
       );
     }
   }]);
