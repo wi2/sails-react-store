@@ -67,7 +67,7 @@ var ReactCollection = (function (_ReactBase) {
       return _react2['default'].createElement(
         'ul',
         { className: '{identity}-list' },
-        this.bindmap(this.state.items, function (item, i) {
+        this.state.items.map(function (item, i) {
           return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.buttons, belongs: _this.belongs });
         })
       );

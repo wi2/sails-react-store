@@ -8,7 +8,4 @@ export class ReactBase extends React.Component {
   componentDidUnmount() {
     this.store.stopListening();
   }
-  bindmap(items, fn) {
-    return items.map(fn.bind(this));
-  }
 }

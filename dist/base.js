@@ -33,11 +33,6 @@ var ReactBase = (function (_React$Component) {
     value: function componentDidUnmount() {
       this.store.stopListening();
     }
-  }, {
-    key: 'bindmap',
-    value: function bindmap(items, fn) {
-      return items.map(fn.bind(this));
-    }
   }]);
 
   return ReactBase;
