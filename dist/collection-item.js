@@ -55,29 +55,27 @@ var ReactItem = (function (_ReactBase) {
   }, {
     key: 'update',
     value: function update(data) {
-      this.props.item = data;
-      this.forceUpdate();
+      this.setState({ item: data });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this = this;
-
+      var item = this.state ? this.state.item : this.props.item;
       return _react2['default'].createElement(
         'li',
         { className: '{identity}-item' },
         _react2['default'].createElement(
           'p',
           null,
-          this.props.item.message
+          item.message
         ),
         _react2['default'].createElement(
           'small',
           null,
-          this.props.item.name
+          item.name
         ),
         this.props.buttons.map(function (icon, i) {
-          return _react2['default'].createElement(ReactItemButton, { key: i, icon: icon, id: _this.props.item.id });
+          return _react2['default'].createElement(ReactItemButton, { key: i, icon: icon, id: item.id });
         })
       );
     }

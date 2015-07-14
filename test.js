@@ -11,6 +11,8 @@ var assert = require('assert');
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 
+
+var ReactBase = require('./index.js').ReactBase;
 var ItemButton = require('./index.js').ReactItemButton;
 var Item = require('./index.js').ReactItem;
 var Collection = require('./index.js').ReactCollection;
@@ -18,11 +20,14 @@ var Collection = require('./index.js').ReactCollection;
 describe('The reactItemButton component', function() {
 
   describe('when no props are given', function() {
-    var hello, post, comment, collectionComponent, items;
+    var base, hello, post, comment, collectionComponent, items;
 
     before(function(done) {
+      base = TestUtils.renderIntoDocument(
+        <ReactBase identity="post" />
+      );
       hello = TestUtils.renderIntoDocument(
-        <ItemButton icon={{name:'Hello'}} />
+        <ItemButton id={1} icon={{name:'Hello', fn: console.log}} />
       );
       post = TestUtils.renderIntoDocument(
         <Item item={{id:1, name: 'Bonjour'}} identity="post" />
@@ -49,7 +54,13 @@ describe('The reactItemButton component', function() {
       setTimeout(done);
     });
 
+    it('should have identity equal post', function() {
+      assert.equal(base.props.identity, 'post');
+    });
+
     it('should have a textContent of "Hello"', function() {
+      assert.equal(hello.props.icon.name, "Hello");
+      assert.equal(hello.props.icon.fn, console.log);
       var name = React.findDOMNode(hello).textContent;
       assert.equal(name, 'Hello');
     });
@@ -65,11 +76,16 @@ describe('The reactItemButton component', function() {
       assert.equal(name, 'hi');
     });
 
+    it('should have a textContent of "hi"', function() {
+      post.store.emit('update', {name:'Matt'});
+      var name = React.findDOMNode(post).textContent;
+      assert.equal(name, 'Matt');
+    });
+
     it('should have a textContent of "a commentMike"', function() {
       var name = React.findDOMNode(comment).textContent;
       assert.equal(name, 'a commentMike');
     });
-
 
     it('should have a textContent of "JohnPaulMikeLeeMary"', function() {
       var name = React.findDOMNode(collectionComponent).textContent;
@@ -108,10 +124,27 @@ describe('The reactItemButton component', function() {
       assert.equal(len, 4);
     });
 
+    it('should have 6 instances of item', function() {
+      items.push({name:"Jo"});
+      items.push({name:"Matt"});
+      collectionComponent.store.emit('add', items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 6);
+    });
 
+    it('should have 6 instances of item', function() {
+      items[0] = {name: 'Bryan'};
+      collectionComponent.store.emit('update', items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 6);
+    });
 
-
-
+    it('should have 5 instances of item', function() {
+      items.pop();
+      collectionComponent.store.emit('remove', items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 5);
+    });
 
 
   });

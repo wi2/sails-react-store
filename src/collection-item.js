@@ -3,7 +3,6 @@ import {ReactBase} from './base.js'
 import {StoreItem} from 'sails-store'
 
 export class ReactItem extends ReactBase {
-
   componentDidMount() {
     let item = this.props.item||this.props.params;
     if (!this.store)
@@ -26,16 +25,16 @@ export class ReactItem extends ReactBase {
     }
   }
   update(data){
-    this.props.item = data;
-    this.forceUpdate()
+    this.setState({item: data});
   }
   render() {
+    let item = this.state ? this.state.item : this.props.item;
     return (
       <li className="{identity}-item">
-        <p>{this.props.item.message}</p>
-        <small>{this.props.item.name}</small>
+        <p>{item.message}</p>
+        <small>{item.name}</small>
         {this.props.buttons.map( (icon,i) => {
-          return <ReactItemButton key={i} icon={icon} id={this.props.item.id} />;
+          return <ReactItemButton key={i} icon={icon} id={item.id} />;
         })}
       </li>
     )

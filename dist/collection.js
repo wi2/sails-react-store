@@ -29,9 +29,7 @@ var ReactCollection = (function (_ReactBase) {
     _classCallCheck(this, ReactCollection);
 
     _get(Object.getPrototypeOf(ReactCollection.prototype), 'constructor', this).call(this, props);
-    //
     this.state = { items: [] };
-    this.buttons = [];
   }
 
   _inherits(ReactCollection, _ReactBase);
@@ -68,7 +66,7 @@ var ReactCollection = (function (_ReactBase) {
         'ul',
         { className: '{identity}-list' },
         this.state.items.map(function (item, i) {
-          return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.buttons, belongs: _this.belongs });
+          return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.props.buttons, belongs: _this.belongs });
         })
       );
     }

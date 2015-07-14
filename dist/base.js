@@ -33,6 +33,11 @@ var ReactBase = (function (_React$Component) {
     value: function componentDidUnmount() {
       this.store.stopListening();
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement('div', null);
+    }
   }]);
 
   return ReactBase;

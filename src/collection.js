@@ -6,9 +6,7 @@ import {StoreCollection} from 'sails-store'
 export class ReactCollection extends ReactBase {
   constructor(props) {
     super(props);
-    //
     this.state = {items: []}
-    this.buttons = [];
   }
   componentDidMount() {
     this.store = new StoreCollection({
@@ -33,7 +31,7 @@ export class ReactCollection extends ReactBase {
     return (
       <ul className="{identity}-list">
         {this.state.items.map( (item,i) => {
-          return <Item identity={this.props.identity} key={i} item={item} buttons={this.buttons} belongs={this.belongs} />;
+          return <Item identity={this.props.identity} key={i} item={item} buttons={this.props.buttons} belongs={this.belongs} />;
         })}
       </ul>
     )

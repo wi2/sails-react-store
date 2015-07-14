@@ -8,4 +8,7 @@ export class ReactBase extends React.Component {
   componentDidUnmount() {
     this.store.stopListening();
   }
+  render(){
+    return <div></div>
+  }
 }
