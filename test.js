@@ -18,7 +18,7 @@ var Collection = require('./index.js').ReactCollection;
 describe('The reactItemButton component', function() {
 
   describe('when no props are given', function() {
-    var hello, post, comment, collectionComponent;
+    var hello, post, comment, collectionComponent, items;
 
     before(function(done) {
       hello = TestUtils.renderIntoDocument(
@@ -31,7 +31,7 @@ describe('The reactItemButton component', function() {
         <Item item={{message:'a comment',name:'Mike'}} buttons  ={[]} />
       );
 
-      var items = [
+      items = [
         {id: 1, name:"John"},
         {id: 2, name:"Paul"},
         {id: 3, name:"Mike"},
@@ -59,15 +59,60 @@ describe('The reactItemButton component', function() {
       assert.equal(name, 'Bonjour');
     });
 
+    it('should have a textContent of "hi"', function() {
+      post.update({name: 'hi'});
+      var name = React.findDOMNode(post).textContent;
+      assert.equal(name, 'hi');
+    });
+
     it('should have a textContent of "a commentMike"', function() {
       var name = React.findDOMNode(comment).textContent;
       assert.equal(name, 'a commentMike');
     });
 
+
     it('should have a textContent of "JohnPaulMikeLeeMary"', function() {
       var name = React.findDOMNode(collectionComponent).textContent;
       assert.equal(name, 'JohnPaulMikeLeeMary');
     });
+
+    it('should have 5 li', function() {
+      var len = TestUtils.scryRenderedDOMComponentsWithTag(collectionComponent, 'li').length
+      assert.equal(len, 5);
+    });
+
+    it('should have 5 instances of item', function() {
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 5);
+    });
+
+    it('should have 4 instances of item', function() {
+      items.pop();
+      collectionComponent.props.items = items;
+      collectionComponent.forceUpdate();
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 4);
+    });
+
+    it('should have 3 instances of item', function() {
+      items.pop();
+      collectionComponent.update(items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 3);
+    });
+
+    it('should have 4 instances of item', function() {
+      items.push({name:"James"});
+      collectionComponent.update(items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      assert.equal(len, 4);
+    });
+
+
+
+
+
+
 
   });
 
