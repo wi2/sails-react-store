@@ -7,3 +7,8 @@ node_js:
 branches:
   only:
     - master
+
+before_install:
+  - npm update -g npm
+  - npm install -g babel
+  - npm install
