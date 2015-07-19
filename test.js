@@ -146,6 +146,19 @@ describe('The reactItemButton component', function() {
       assert.equal(len, 5);
     });
 
+    it('should change first item to Bobby then Bob', function() {
+      var item1 = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
+
+      item1.store.update({name:"Bobby"});
+      var item1Check = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
+      assert.equal(item1Check.state.item.name, "Bobby");
+
+      item1.store.update({name:"Bob"});
+      var item2Check = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
+      assert.equal(item1Check.state.item.name, "Bob");
+
+    });
+
 
   });
 
