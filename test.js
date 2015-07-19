@@ -104,8 +104,7 @@ describe('The reactItemButton component', function() {
 
     it('should have 4 instances of item', function() {
       items.pop();
-      collectionComponent.props.items = items;
-      collectionComponent.forceUpdate();
+      collectionComponent.update(items);
       var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
       assert.equal(len, 4);
     });
@@ -151,11 +150,13 @@ describe('The reactItemButton component', function() {
 
       item1.store.update({name:"Bobby"});
       var item1Check = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
-      assert.equal(item1Check.state.item.name, "Bobby");
+
+      var name = React.findDOMNode(item1Check).textContent;
+      assert.equal(name, 'Bobby');
 
       item1.store.update({name:"Bob"});
-      var item2Check = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
-      assert.equal(item1Check.state.item.name, "Bob");
+      var name = React.findDOMNode(item1Check).textContent;
+      assert.equal(name, 'Bob');
 
     });
 

@@ -55,15 +55,16 @@ var ReactItem = (function (_ReactBase) {
   }, {
     key: 'update',
     value: function update(data) {
-      this.setState({ item: data });
+      this.store.setItems(data);
+      this.forceUpdate();
     }
   }, {
     key: 'render',
     value: function render() {
-      var item = this.state ? this.state.item : this.props.item;
+      var item = this.store ? this.store.value : this.props.item;
       return _react2['default'].createElement(
         'li',
-        { className: '{identity}-item' },
+        { className: '{this.identity}-item' },
         _react2['default'].createElement(
           'p',
           null,

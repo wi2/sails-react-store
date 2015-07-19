@@ -44,8 +44,7 @@ var ReactCollection = (function (_ReactBase) {
       if (!this.props.items) {
         this.store.get();
       } else {
-        this.store.setItems(this.props.items);
-        this.setState({ items: this.props.items });
+        this.update(this.props.items);
       }
       this.store.on('add', this.update.bind(this));
       this.store.on('remove', this.update.bind(this));
@@ -54,7 +53,8 @@ var ReactCollection = (function (_ReactBase) {
   }, {
     key: 'update',
     value: function update(data) {
-      this.setState({ items: data });
+      this.store.setItems(data);
+      this.forceUpdate();
     }
   }, {
     key: 'render',
@@ -62,10 +62,11 @@ var ReactCollection = (function (_ReactBase) {
       var _this = this;
 
       var Item = this.reactItem || _collectionItemJs.ReactItem;
+      var items = this.store ? this.store.value : this.props.items;
       return _react2['default'].createElement(
         'ul',
         { className: '{identity}-list' },
-        this.state.items.map(function (item, i) {
+        items.map(function (item, i) {
           return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.props.buttons, belongs: _this.belongs });
         })
       );
