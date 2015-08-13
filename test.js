@@ -93,33 +93,34 @@ describe('The reactItemButton component', function() {
     });
 
     it('should have 5 li', function() {
-      var len = TestUtils.scryRenderedDOMComponentsWithTag(collectionComponent, 'li').length
+      var len = TestUtils.scryRenderedDOMComponentsWithTag(collectionComponent, 'li').length;
       assert.equal(len, 5);
     });
 
     it('should have 5 instances of item', function() {
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 5);
     });
 
     it('should have 4 instances of item', function() {
       items.pop();
-      collectionComponent.update(items);
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
-      assert.equal(len, 4);
+      collectionComponent.update(items, function(){
+        var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
+        assert.equal(len, 4);
+      });
     });
 
     it('should have 3 instances of item', function() {
       items.pop();
       collectionComponent.update(items);
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 3);
     });
 
     it('should have 4 instances of item', function() {
       items.push({name:"James"});
       collectionComponent.update(items);
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 4);
     });
 
@@ -127,21 +128,21 @@ describe('The reactItemButton component', function() {
       items.push({name:"Jo"});
       items.push({name:"Matt"});
       collectionComponent.store.emit('add', items);
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 6);
     });
 
     it('should have 6 instances of item', function() {
       items[0] = {name: 'Bryan'};
       collectionComponent.store.emit('update', items);
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 6);
     });
 
     it('should have 5 instances of item', function() {
       items.pop();
       collectionComponent.store.emit('remove', items);
-      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 5);
     });
 
@@ -157,7 +158,20 @@ describe('The reactItemButton component', function() {
       item1.store.update({name:"Bob"});
       var name = React.findDOMNode(item1Check).textContent;
       assert.equal(name, 'Bob');
+    });
 
+    it('should change first item to Michael then Mike', function() {
+      var item1 = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
+
+      item1.store.update({name:"Michael"});
+      var item1Check = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
+
+      var name = React.findDOMNode(item1Check).textContent;
+      assert.equal(name, 'Michael');
+
+      item1.store.update({name:"Mike"});
+      var name = React.findDOMNode(item1Check).textContent;
+      assert.equal(name, 'Mike');
     });
 
 

@@ -4,27 +4,22 @@ import {ReactItem} from './collection-item.js'
 import {StoreCollection} from 'sails-store'
 
 export class ReactCollection extends ReactBase {
-  constructor(props) {
-    super(props);
-    this.state = {items: []}
-  }
   componentDidMount() {
     this.store = new StoreCollection({
       identity: this.identity
     });
+    this.store.get();
     //
-    if (!this.props.items) {
-      this.store.get();
-    } else {
-      this.update(this.props.items)
-    }
     this.store.on('add', this.update.bind(this));
     this.store.on('remove', this.update.bind(this));
     this.store.on('update', this.update.bind(this));
   }
   update(data){
+    this.setState({items: data});
     this.store.setItems(data);
-    this.forceUpdate()
+  }
+  shouldComponentUpdate(props, state) {
+    return props !== state
   }
   render() {
     var Item = this.reactItem||ReactItem;
@@ -38,4 +33,6 @@ export class ReactCollection extends ReactBase {
     )
   }
 }
+
+ReactItem.propTypes = { items: React.PropTypes.array };
 

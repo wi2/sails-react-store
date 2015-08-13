@@ -25,11 +25,10 @@ var _collectionItemJs = require('./collection-item.js');
 var _sailsStore = require('sails-store');
 
 var ReactCollection = (function (_ReactBase) {
-  function ReactCollection(props) {
+  function ReactCollection() {
     _classCallCheck(this, ReactCollection);
 
-    _get(Object.getPrototypeOf(ReactCollection.prototype), 'constructor', this).call(this, props);
-    this.state = { items: [] };
+    _get(Object.getPrototypeOf(ReactCollection.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _inherits(ReactCollection, _ReactBase);
@@ -40,12 +39,8 @@ var ReactCollection = (function (_ReactBase) {
       this.store = new _sailsStore.StoreCollection({
         identity: this.identity
       });
+      this.store.get();
       //
-      if (!this.props.items) {
-        this.store.get();
-      } else {
-        this.update(this.props.items);
-      }
       this.store.on('add', this.update.bind(this));
       this.store.on('remove', this.update.bind(this));
       this.store.on('update', this.update.bind(this));
@@ -53,8 +48,13 @@ var ReactCollection = (function (_ReactBase) {
   }, {
     key: 'update',
     value: function update(data) {
+      this.setState({ items: data });
       this.store.setItems(data);
-      this.forceUpdate();
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(props, state) {
+      return props !== state;
     }
   }, {
     key: 'render',
@@ -77,3 +77,5 @@ var ReactCollection = (function (_ReactBase) {
 })(_baseJs.ReactBase);
 
 exports.ReactCollection = ReactCollection;
+
+_collectionItemJs.ReactItem.propTypes = { items: _react2['default'].PropTypes.array };
