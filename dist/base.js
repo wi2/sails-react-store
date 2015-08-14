@@ -38,6 +38,12 @@ var ReactBase = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement('div', null);
     }
+  }], [{
+    key: 'propTypes',
+    value: {
+      identity: _react2['default'].PropTypes.string.isRequired
+    },
+    enumerable: true
   }]);
 
   return ReactBase;

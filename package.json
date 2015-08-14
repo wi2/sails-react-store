@@ -4,7 +4,7 @@
   "description": "React view isomorph with socket.io for sailsjs ",
   "scripts": {
     "test": "npm run prepublish && mocha --compilers js:babel-core/register test.js",
-    "prepublish": "babel src --out-dir dist"
+    "prepublish": "babel src --stage 0 --out-dir dist"
   },
   "keywords": [
     "sails",

@@ -3,6 +3,20 @@ import {ReactBase} from './base.js'
 import {StoreItem} from 'sails-store'
 
 export class ReactItem extends ReactBase {
+  static defaultProps = {
+    item: {},
+    buttons: []
+  }
+  static propTypes = {
+    item: React.PropTypes.object.isRequired,
+    buttons: React.PropTypes.array.isRequired
+  }
+
+  update(data){
+    this.store.setItems(data);
+    this.forceUpdate()
+  }
+
   componentDidMount() {
     let item = this.props.item||this.props.params;
     if (!this.store)
@@ -23,10 +37,6 @@ export class ReactItem extends ReactBase {
       delete this.props.params;
       this.store.get();
     }
-  }
-  update(data){
-    this.store.setItems(data);
-    this.forceUpdate()
   }
   render() {
     let item = this.store ? this.store.value : this.props.item;

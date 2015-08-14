@@ -32,6 +32,12 @@ var ReactItem = (function (_ReactBase) {
   _inherits(ReactItem, _ReactBase);
 
   _createClass(ReactItem, [{
+    key: 'update',
+    value: function update(data) {
+      this.store.setItems(data);
+      this.forceUpdate();
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var item = this.props.item || this.props.params;
@@ -51,12 +57,6 @@ var ReactItem = (function (_ReactBase) {
         delete this.props.params;
         this.store.get();
       }
-    }
-  }, {
-    key: 'update',
-    value: function update(data) {
-      this.store.setItems(data);
-      this.forceUpdate();
     }
   }, {
     key: 'render',
@@ -80,6 +80,20 @@ var ReactItem = (function (_ReactBase) {
         })
       );
     }
+  }], [{
+    key: 'defaultProps',
+    value: {
+      item: {},
+      buttons: []
+    },
+    enumerable: true
+  }, {
+    key: 'propTypes',
+    value: {
+      item: _react2['default'].PropTypes.object.isRequired,
+      buttons: _react2['default'].PropTypes.array.isRequired
+    },
+    enumerable: true
   }]);
 
   return ReactItem;
