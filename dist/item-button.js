@@ -81,7 +81,7 @@ var ReactItemButtons = (function (_ReactBase2) {
       return _react2['default'].createElement(
         'div',
         null,
-        this.props.btns.map(function (icon, i) {
+        this.props.items.map(function (icon, i) {
           return _react2['default'].createElement(ReactItemButton, { key: i, fn: icon.fn, name: icon.name, id: _this.props.id });
         })
       );
@@ -89,14 +89,14 @@ var ReactItemButtons = (function (_ReactBase2) {
   }], [{
     key: 'defaultProps',
     value: {
-      btns: [],
-      id: 0
+      items: [],
+      max: 10
     },
     enumerable: true
   }, {
     key: 'propTypes',
     value: {
-      btns: _react2['default'].PropTypes.array.isRequired,
+      items: _react2['default'].PropTypes.array.isRequired,
       id: _react2['default'].PropTypes.number.isRequired
     },
     enumerable: true

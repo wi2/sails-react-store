@@ -22,18 +22,18 @@ export class ReactItemButton extends ReactBase {
 
 export class ReactItemButtons extends ReactBase {
   static defaultProps = {
-    btns: [],
-    id: 0
+    items: [],
+    max: 10
   }
   static propTypes = {
-    btns: React.PropTypes.array.isRequired,
+    items: React.PropTypes.array.isRequired,
     id: React.PropTypes.number.isRequired
   }
 
   render() {
     return (
       <div>
-      {this.props.btns.map( (icon,i) => {
+      {this.props.items.map( (icon,i) => {
         return <ReactItemButton key={i} fn={icon.fn} name={icon.name} id={this.props.id} />;
       })}
       </div>

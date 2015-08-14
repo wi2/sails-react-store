@@ -77,7 +77,7 @@ var ReactItem = (function (_ReactBase) {
           null,
           item.name
         ),
-        _react2['default'].createElement(_itemButtonJs.ReactItemButtons, { btns: this.props.buttons, id: item.id })
+        _react2['default'].createElement(_itemButtonJs.ReactItemButtons, { items: this.props.buttons, id: item.id })
       );
     }
   }], [{

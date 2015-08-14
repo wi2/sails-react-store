@@ -1,45 +1,18 @@
-
-if (typeof document === 'undefined') {
-  var jsdom = require("node-jsdom").jsdom;
-  global.document = jsdom('<!doctype html><html><body></body></html>');
-  global.window = document.parentWindow;
-  global.navigator = {userAgent: ''};
-}
-
-
+var jsdom = require('./helper.js');
 var assert = require('assert');
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 
+var ReactStore = require('../index.js');
 
-var ReactBase = require('./index.js').ReactBase;
-var ItemButton = require('./index.js').ReactItemButton;
-var ItemButtons = require('./index.js').ReactItemButtons;
-var Item = require('./index.js').ReactItem;
-var Collection = require('./index.js').ReactCollection;
+var Item = ReactStore.ReactItem
+  , Collection = ReactStore.ReactCollection;
 
-describe('The reactItemButton component', function() {
+describe('collection testing', function() {
 
-  describe('when no props are given', function() {
-    var base, hello, hello2, post, comment, collectionComponent, items;
+  var items, collectionComponent;
 
-    before(function(done) {
-      base = TestUtils.renderIntoDocument(
-        <ReactBase identity="post" />
-      );
-      hello = TestUtils.renderIntoDocument(
-        <ItemButton id={1} name="Hello" fn={console.log} />
-      );
-      hello2 = TestUtils.renderIntoDocument(
-        <ItemButton id={2} name="Hello 2" />
-      );
-      post = TestUtils.renderIntoDocument(
-        <Item item={{id:1, name: 'Bonjour'}} identity="post" />
-      );
-      comment = TestUtils.renderIntoDocument(
-        <Item item={{message:'a comment',name:'Mike'}} buttons  ={[]} />
-      );
-
+  before(function(done) {
       items = [
         {id: 1, name:"John"},
         {id: 2, name:"Paul"},
@@ -50,47 +23,15 @@ describe('The reactItemButton component', function() {
       collectionComponent = TestUtils.renderIntoDocument(
         <Collection identity="post" items={items} />
       );
-      done()
-    });
+    done()
+  });
 
-    afterEach(function(done) {
-      React.unmountComponentAtNode(document.body);
-      setTimeout(done);
-    });
+  after(function(done) {
+    React.unmountComponentAtNode(document.body);
+    setTimeout(done);
+  });
 
-    it('should have identity equal post', function() {
-      assert.equal(base.props.identity, 'post');
-    });
-
-    it('should have a textContent of "Hello"', function() {
-      assert.equal(hello.props.name, "Hello");
-      assert.equal(hello.props.fn, console.log);
-      var name = React.findDOMNode(hello).textContent;
-      assert.equal(name, 'Hello');
-    });
-
-    it('should have a textContent of "Bonjour"', function() {
-      var name = React.findDOMNode(post).textContent;
-      assert.equal(name, 'Bonjour');
-    });
-
-    it('should have a textContent of "hi"', function() {
-      post.update({name: 'hi'});
-      var name = React.findDOMNode(post).textContent;
-      assert.equal(name, 'hi');
-    });
-
-    it('should have a textContent of "hi"', function() {
-      post.store.emit('update', {name:'Matt'});
-      var name = React.findDOMNode(post).textContent;
-      assert.equal(name, 'Matt');
-    });
-
-    it('should have a textContent of "a commentMike"', function() {
-      var name = React.findDOMNode(comment).textContent;
-      assert.equal(name, 'a commentMike');
-    });
-
+  describe('post', function() {
     it('should have a textContent of "JohnPaulMikeLeeMary"', function() {
       var name = React.findDOMNode(collectionComponent).textContent;
       assert.equal(name, 'JohnPaulMikeLeeMary');
@@ -122,15 +63,15 @@ describe('The reactItemButton component', function() {
     });
 
     it('should have 4 instances of item', function() {
-      items.push({name:"James"});
+      items.push({name:"James", id:6});
       collectionComponent.update(items);
       var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 4);
     });
 
     it('should have 6 instances of item', function() {
-      items.push({name:"Jo"});
-      items.push({name:"Matt"});
+      items.push({name:"Jo", id:7});
+      items.push({name:"Matt", id:8});
       collectionComponent.store.emit('add', items);
       var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 6);
@@ -150,6 +91,8 @@ describe('The reactItemButton component', function() {
       assert.equal(len, 5);
     });
 
+  });
+  describe('comment', function() {
     it('should change first item to Bobby then Bob', function() {
       var item1 = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
 
@@ -177,9 +120,6 @@ describe('The reactItemButton component', function() {
       var name = React.findDOMNode(item1Check).textContent;
       assert.equal(name, 'Mike');
     });
-
-
   });
-
 
 });

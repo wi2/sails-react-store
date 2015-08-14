@@ -45,7 +45,7 @@ export class ReactItem extends ReactBase {
       <li className="{this.identity}-item">
         <p>{item.message}</p>
         <small>{item.name}</small>
-        <ReactItemButtons btns={this.props.buttons} id={item.id} />
+        <ReactItemButtons items={this.props.buttons} id={item.id} />
       </li>
     )
   }
