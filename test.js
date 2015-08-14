@@ -14,20 +14,24 @@ var TestUtils = React.addons.TestUtils;
 
 var ReactBase = require('./index.js').ReactBase;
 var ItemButton = require('./index.js').ReactItemButton;
+var ItemButtons = require('./index.js').ReactItemButtons;
 var Item = require('./index.js').ReactItem;
 var Collection = require('./index.js').ReactCollection;
 
 describe('The reactItemButton component', function() {
 
   describe('when no props are given', function() {
-    var base, hello, post, comment, collectionComponent, items;
+    var base, hello, hello2, post, comment, collectionComponent, items;
 
     before(function(done) {
       base = TestUtils.renderIntoDocument(
         <ReactBase identity="post" />
       );
       hello = TestUtils.renderIntoDocument(
-        <ItemButton id={1} icon={{name:'Hello', fn: console.log}} />
+        <ItemButton id={1} name="Hello" fn={console.log} />
+      );
+      hello2 = TestUtils.renderIntoDocument(
+        <ItemButton id={2} name="Hello 2" />
       );
       post = TestUtils.renderIntoDocument(
         <Item item={{id:1, name: 'Bonjour'}} identity="post" />
@@ -59,8 +63,8 @@ describe('The reactItemButton component', function() {
     });
 
     it('should have a textContent of "Hello"', function() {
-      assert.equal(hello.props.icon.name, "Hello");
-      assert.equal(hello.props.icon.fn, console.log);
+      assert.equal(hello.props.name, "Hello");
+      assert.equal(hello.props.fn, console.log);
       var name = React.findDOMNode(hello).textContent;
       assert.equal(name, 'Hello');
     });
