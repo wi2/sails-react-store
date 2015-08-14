@@ -21,6 +21,12 @@ Object.defineProperty(exports, 'ReactItemButton', {
     return _itemButtonJs.ReactItemButton;
   }
 });
+Object.defineProperty(exports, 'ReactItemButtons', {
+  enumerable: true,
+  get: function get() {
+    return _itemButtonJs.ReactItemButtons;
+  }
+});
 
 var _collectionItemJs = require('./collection-item.js');
 

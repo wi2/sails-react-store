@@ -20,6 +20,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _baseJs = require('./base.js');
 
+var _itemButtonJs = require('./item-button.js');
+
 var _sailsStore = require('sails-store');
 
 var ReactItem = (function (_ReactBase) {
@@ -75,9 +77,7 @@ var ReactItem = (function (_ReactBase) {
           null,
           item.name
         ),
-        this.props.buttons.map(function (icon, i) {
-          return _react2['default'].createElement(ReactItemButton, { key: i, icon: icon, id: item.id });
-        })
+        _react2['default'].createElement(_itemButtonJs.ReactItemButtons, { btns: this.props.buttons, id: item.id })
       );
     }
   }], [{
@@ -100,6 +100,3 @@ var ReactItem = (function (_ReactBase) {
 })(_baseJs.ReactBase);
 
 exports.ReactItem = ReactItem;
-
-ReactItem.propTypes = { item: _react2['default'].PropTypes.object };
-ReactItem.defaultProps = { buttons: [] };

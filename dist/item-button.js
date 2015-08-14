@@ -21,10 +21,10 @@ var _react2 = _interopRequireDefault(_react);
 var _baseJs = require('./base.js');
 
 var ReactItemButton = (function (_ReactBase) {
-  function ReactItemButton(props) {
+  function ReactItemButton() {
     _classCallCheck(this, ReactItemButton);
 
-    _get(Object.getPrototypeOf(ReactItemButton.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(ReactItemButton.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _inherits(ReactItemButton, _ReactBase);
@@ -33,7 +33,7 @@ var ReactItemButton = (function (_ReactBase) {
     key: 'handleEvent',
     value: function handleEvent(e) {
       e.preventDefault();
-      this.props.icon.fn(this.props.id);
+      this.props.fn(this.props.id);
     }
   }, {
     key: 'render',
@@ -41,12 +41,68 @@ var ReactItemButton = (function (_ReactBase) {
       return _react2['default'].createElement(
         'button',
         { onClick: this.handleEvent.bind(this) },
-        this.props.icon.name
+        this.props.name
       );
     }
+  }], [{
+    key: 'defaultProps',
+    value: {
+      fn: function fn() {}
+    },
+    enumerable: true
+  }, {
+    key: 'propTypes',
+    value: {
+      name: _react2['default'].PropTypes.string.isRequired,
+      fn: _react2['default'].PropTypes.func.isRequired
+    },
+    enumerable: true
   }]);
 
   return ReactItemButton;
 })(_baseJs.ReactBase);
 
 exports.ReactItemButton = ReactItemButton;
+
+var ReactItemButtons = (function (_ReactBase2) {
+  function ReactItemButtons() {
+    _classCallCheck(this, ReactItemButtons);
+
+    _get(Object.getPrototypeOf(ReactItemButtons.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _inherits(ReactItemButtons, _ReactBase2);
+
+  _createClass(ReactItemButtons, [{
+    key: 'render',
+    value: function render() {
+      var _this = this;
+
+      return _react2['default'].createElement(
+        'div',
+        null,
+        this.props.btns.map(function (icon, i) {
+          return _react2['default'].createElement(ReactItemButton, { key: i, fn: icon.fn, name: icon.name, id: _this.props.id });
+        })
+      );
+    }
+  }], [{
+    key: 'defaultProps',
+    value: {
+      btns: [],
+      id: 0
+    },
+    enumerable: true
+  }, {
+    key: 'propTypes',
+    value: {
+      btns: _react2['default'].PropTypes.array.isRequired,
+      id: _react2['default'].PropTypes.number.isRequired
+    },
+    enumerable: true
+  }]);
+
+  return ReactItemButtons;
+})(_baseJs.ReactBase);
+
+exports.ReactItemButtons = ReactItemButtons;

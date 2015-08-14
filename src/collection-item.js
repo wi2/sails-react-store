@@ -1,5 +1,6 @@
 import React from 'react'
 import {ReactBase} from './base.js'
+import {ReactItemButtons} from './item-button.js'
 import {StoreItem} from 'sails-store'
 
 export class ReactItem extends ReactBase {
@@ -44,13 +45,8 @@ export class ReactItem extends ReactBase {
       <li className="{this.identity}-item">
         <p>{item.message}</p>
         <small>{item.name}</small>
-        {this.props.buttons.map( (icon,i) => {
-          return <ReactItemButton key={i} icon={icon} id={item.id} />;
-        })}
+        <ReactItemButtons btns={this.props.buttons} id={item.id} />
       </li>
     )
   }
 }
-
-ReactItem.propTypes = { item: React.PropTypes.object };
-ReactItem.defaultProps = { buttons: [] };
