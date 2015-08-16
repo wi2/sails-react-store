@@ -1,12 +1,12 @@
-var jsdom = require('./helper.js');
-var assert = require('assert');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+const jsdom = require('./helper.js');
+const assert = require('assert');
 
-var ReactStore = require('../index.js');
+const React = require('react/addons');
+const TestUtils = React.addons.TestUtils;
 
-var ItemButton = ReactStore.ReactItemButton;
-var FewButtons = ReactStore.ReactItemButtons;
+const ReactStore = require('../index.js');
+const ItemButton = ReactStore.ReactItemButton;
+const FewButtons = ReactStore.ReactItemButtons;
 
 describe('Button testing', function() {
 

@@ -1,28 +1,33 @@
-var jsdom = require('./helper.js');
-var assert = require('assert');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+const jsdom = require('./helper.js');
+const assert = require('assert');
 
-var ReactStore = require('../index.js');
+const React = require('react/addons');
+const TestUtils = React.addons.TestUtils;
+const shallowRenderer = TestUtils.createRenderer();
 
-var Item = ReactStore.ReactItem
+const ReactStore = require('../index.js')
+  , Item = ReactStore.ReactItem
   , Collection = ReactStore.ReactCollection;
 
 describe('collection testing', function() {
 
-  var items, collectionComponent;
+  var items, collectionComponent, swcollectionComponent;
 
   before(function(done) {
-      items = [
-        {id: 1, name:"John"},
-        {id: 2, name:"Paul"},
-        {id: 3, name:"Mike"},
-        {id: 4, name:"Lee"},
-        {id: 5, name:"Mary"}
-      ];
-      collectionComponent = TestUtils.renderIntoDocument(
-        <Collection identity="post" items={items} />
-      );
+    items = [
+      {id: 1, name:"John"},
+      {id: 2, name:"Paul"},
+      {id: 3, name:"Mike"},
+      {id: 4, name:"Lee"},
+      {id: 5, name:"Mary"}
+    ];
+    collectionComponent = TestUtils.renderIntoDocument(
+      <Collection identity="post" items={items} />
+    );
+    swcollectionComponent = React.createElement(
+      Collection,
+      {identity: "post", items: items}
+    );
     done()
   });
 
@@ -120,6 +125,13 @@ describe('collection testing', function() {
       var name = React.findDOMNode(item1Check).textContent;
       assert.equal(name, 'Mike');
     });
+
+    it('classname should equal to post-list', function() {
+      shallowRenderer.render(swcollectionComponent);
+      const comp = shallowRenderer.getRenderOutput();
+      assert.equal(comp.props.className, 'post-list');
+    });
+
   });
 
 });
