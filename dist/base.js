@@ -19,11 +19,10 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var ReactBase = (function (_React$Component) {
-  function ReactBase(props) {
+  function ReactBase() {
     _classCallCheck(this, ReactBase);
 
-    _get(Object.getPrototypeOf(ReactBase.prototype), 'constructor', this).call(this, props);
-    this.identity = props.identity;
+    _get(Object.getPrototypeOf(ReactBase.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _inherits(ReactBase, _React$Component);
@@ -36,7 +35,7 @@ var ReactBase = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement('div', null);
+      return _react2['default'].createElement('div', { className: this.props.identity + '-section' });
     }
   }], [{
     key: 'propTypes',
@@ -49,4 +48,5 @@ var ReactBase = (function (_React$Component) {
   return ReactBase;
 })(_react2['default'].Component);
 
-exports.ReactBase = ReactBase;
+exports['default'] = ReactBase;
+module.exports = exports['default'];

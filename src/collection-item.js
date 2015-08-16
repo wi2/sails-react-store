@@ -1,9 +1,9 @@
 import React from 'react'
-import {ReactBase} from './base.js'
+import ReactBase from './base.js'
 import {ReactItemButtons} from './item-button.js'
 import {StoreItem} from 'sails-store'
 
-export class ReactItem extends ReactBase {
+export default class ReactItem extends ReactBase {
   static defaultProps = {
     item: {},
     buttons: []
@@ -22,7 +22,7 @@ export class ReactItem extends ReactBase {
     let item = this.props.item||this.props.params;
     if (!this.store)
       this.store = new StoreItem({
-        identity: this.identity,
+        identity: this.props.identity,
         value: item,
         belongs: this.props.belongs
       });
@@ -42,7 +42,7 @@ export class ReactItem extends ReactBase {
   render() {
     let item = this.store ? this.store.value : this.props.item;
     return (
-      <li className="{this.identity}-item">
+      <li className={this.props.identity+'-item'}>
         <p>{item.message}</p>
         <small>{item.name}</small>
         <ReactItemButtons items={this.props.buttons} id={item.id} />

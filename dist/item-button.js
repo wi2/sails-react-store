@@ -20,6 +20,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _baseJs = require('./base.js');
 
+var _baseJs2 = _interopRequireDefault(_baseJs);
+
 var ReactItemButton = (function (_ReactBase) {
   function ReactItemButton() {
     _classCallCheck(this, ReactItemButton);
@@ -60,7 +62,7 @@ var ReactItemButton = (function (_ReactBase) {
   }]);
 
   return ReactItemButton;
-})(_baseJs.ReactBase);
+})(_baseJs2['default']);
 
 exports.ReactItemButton = ReactItemButton;
 
@@ -103,6 +105,6 @@ var ReactItemButtons = (function (_ReactBase2) {
   }]);
 
   return ReactItemButtons;
-})(_baseJs.ReactBase);
+})(_baseJs2['default']);
 
 exports.ReactItemButtons = ReactItemButtons;

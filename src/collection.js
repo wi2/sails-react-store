@@ -1,9 +1,9 @@
 import React from 'react'
-import {ReactBase} from './base.js'
-import {ReactItem} from './collection-item.js'
+import ReactBase from './base.js'
+import ReactItem from './collection-item.js'
 import {StoreCollection} from 'sails-store'
 
-export class ReactCollection extends ReactBase {
+export default class ReactCollection extends ReactBase {
   static defaultProps = {
     items: [],
     max: 10
@@ -23,7 +23,7 @@ export class ReactCollection extends ReactBase {
 
   componentDidMount() {
     this.store = new StoreCollection({
-      identity: this.identity
+      identity: this.props.identity
     });
 
     this.store.get();
@@ -39,7 +39,7 @@ export class ReactCollection extends ReactBase {
     var Item = this.reactItem||ReactItem;
     let items = this.store ? this.store.value : this.props.items;
     return (
-      <ul className="{identity}-list">
+      <ul className={this.props.identity+'-list'}>
         {items.map( (item,i) => {
           return <Item identity={this.props.identity} key={i} item={item} buttons={this.props.buttons} belongs={this.belongs} />;
         })}

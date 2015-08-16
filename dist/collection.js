@@ -20,7 +20,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _baseJs = require('./base.js');
 
+var _baseJs2 = _interopRequireDefault(_baseJs);
+
 var _collectionItemJs = require('./collection-item.js');
+
+var _collectionItemJs2 = _interopRequireDefault(_collectionItemJs);
 
 var _sailsStore = require('sails-store');
 
@@ -47,7 +51,7 @@ var ReactCollection = (function (_ReactBase) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.store = new _sailsStore.StoreCollection({
-        identity: this.identity
+        identity: this.props.identity
       });
 
       this.store.get();
@@ -66,11 +70,11 @@ var ReactCollection = (function (_ReactBase) {
     value: function render() {
       var _this = this;
 
-      var Item = this.reactItem || _collectionItemJs.ReactItem;
+      var Item = this.reactItem || _collectionItemJs2['default'];
       var items = this.store ? this.store.value : this.props.items;
       return _react2['default'].createElement(
         'ul',
-        { className: '{identity}-list' },
+        { className: this.props.identity + '-list' },
         items.map(function (item, i) {
           return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.props.buttons, belongs: _this.belongs });
         })
@@ -93,6 +97,7 @@ var ReactCollection = (function (_ReactBase) {
   }]);
 
   return ReactCollection;
-})(_baseJs.ReactBase);
+})(_baseJs2['default']);
 
-exports.ReactCollection = ReactCollection;
+exports['default'] = ReactCollection;
+module.exports = exports['default'];

@@ -20,6 +20,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _baseJs = require('./base.js');
 
+var _baseJs2 = _interopRequireDefault(_baseJs);
+
 var _itemButtonJs = require('./item-button.js');
 
 var _sailsStore = require('sails-store');
@@ -44,7 +46,7 @@ var ReactItem = (function (_ReactBase) {
     value: function componentDidMount() {
       var item = this.props.item || this.props.params;
       if (!this.store) this.store = new _sailsStore.StoreItem({
-        identity: this.identity,
+        identity: this.props.identity,
         value: item,
         belongs: this.props.belongs
       });else this.store.startListening();
@@ -66,7 +68,7 @@ var ReactItem = (function (_ReactBase) {
       var item = this.store ? this.store.value : this.props.item;
       return _react2['default'].createElement(
         'li',
-        { className: '{this.identity}-item' },
+        { className: this.props.identity + '-item' },
         _react2['default'].createElement(
           'p',
           null,
@@ -97,6 +99,7 @@ var ReactItem = (function (_ReactBase) {
   }]);
 
   return ReactItem;
-})(_baseJs.ReactBase);
+})(_baseJs2['default']);
 
-exports.ReactItem = ReactItem;
+exports['default'] = ReactItem;
+module.exports = exports['default'];

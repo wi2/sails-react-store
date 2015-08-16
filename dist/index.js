@@ -4,14 +4,13 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 var _baseJs = require('./base.js');
 
-Object.defineProperty(exports, 'ReactBase', {
-  enumerable: true,
-  get: function get() {
-    return _baseJs.ReactBase;
-  }
-});
+var _baseJs2 = _interopRequireDefault(_baseJs);
+
+exports.ReactBase = _baseJs2['default'];
 
 var _itemButtonJs = require('./item-button.js');
 
@@ -30,18 +29,12 @@ Object.defineProperty(exports, 'ReactItemButtons', {
 
 var _collectionItemJs = require('./collection-item.js');
 
-Object.defineProperty(exports, 'ReactItem', {
-  enumerable: true,
-  get: function get() {
-    return _collectionItemJs.ReactItem;
-  }
-});
+var _collectionItemJs2 = _interopRequireDefault(_collectionItemJs);
+
+exports.ReactItem = _collectionItemJs2['default'];
 
 var _collectionJs = require('./collection.js');
 
-Object.defineProperty(exports, 'ReactCollection', {
-  enumerable: true,
-  get: function get() {
-    return _collectionJs.ReactCollection;
-  }
-});
+var _collectionJs2 = _interopRequireDefault(_collectionJs);
+
+exports.ReactCollection = _collectionJs2['default'];
