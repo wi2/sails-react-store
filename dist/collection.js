@@ -61,11 +61,6 @@ var ReactCollection = (function (_ReactBase) {
     }
   }, {
     key: 'render',
-
-    // shouldComponentUpdate(props, state) {
-    //   console.log("--->", props, state.items !== this.store.value.data)
-    //   return state.items !== this.store.value.data
-    // }
     value: function render() {
       var _this = this;
 

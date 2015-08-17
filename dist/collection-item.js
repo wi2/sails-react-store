@@ -27,10 +27,20 @@ var _itemButtonJs = require('./item-button.js');
 var _sailsStore = require('sails-store');
 
 var ReactItem = (function (_ReactBase) {
-  function ReactItem() {
+  function ReactItem(props) {
     _classCallCheck(this, ReactItem);
 
-    _get(Object.getPrototypeOf(ReactItem.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(ReactItem.prototype), 'constructor', this).call(this, props);
+    var item = this.props.params ? this.props.params : this.props.item;
+
+    this.store = new _sailsStore.StoreItem({
+      identity: this.props.identity,
+      value: item,
+      belongs: this.props.belongs
+    });
+    this.store.startListening();
+    this.store.on('update', this.update.bind(this));
+    if (!item.createdAt) this.store.get();
   }
 
   _inherits(ReactItem, _ReactBase);
@@ -39,18 +49,6 @@ var ReactItem = (function (_ReactBase) {
     key: 'update',
     value: function update(data) {
       this.forceUpdate();
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var item = this.props.item || this.props.params;
-      if (!this.store) this.store = new _sailsStore.StoreItem({
-        identity: this.props.identity,
-        value: item,
-        belongs: this.props.belongs
-      });else this.store.startListening();
-      this.store.on('update', this.update.bind(this));
-      if (!item.createdAt) this.store.get();
     }
   }, {
     key: 'componentDidUpdate',
