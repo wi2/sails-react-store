@@ -42,13 +42,14 @@ describe('collection-item testing', function() {
     });
 
     it('should have a textContent of "hi"', function() {
-      post.update({name: 'hi'});
-      var name = React.findDOMNode(post).textContent;
-      assert.equal(name, 'hi');
+      post.update({name: 'hi'}, function(){
+        var name = React.findDOMNode(post).textContent;
+        assert.equal(name, 'hi');
+      });
     });
 
     it('should have a textContent of "hi"', function() {
-      post.store.emit('update', {name:'Matt'});
+      post.store.onChange({verb:'updated', id: post.store.value.id, data: {name:'Matt'} });
       var name = React.findDOMNode(post).textContent;
       assert.equal(name, 'Matt');
     });

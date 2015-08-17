@@ -92,7 +92,8 @@ var ReactItemButtons = (function (_ReactBase2) {
     key: 'defaultProps',
     value: {
       items: [],
-      max: 10
+      max: 10,
+      id: 0
     },
     enumerable: true
   }, {

@@ -14,7 +14,6 @@ export default class ReactItem extends ReactBase {
   }
 
   update(data){
-    this.store.setItems(data);
     this.forceUpdate()
   }
 
@@ -32,11 +31,12 @@ export default class ReactItem extends ReactBase {
     if (!item.createdAt)
       this.store.get();
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.params){
-      this.store.setItems(this.props.params);
+      this.store.update(this.props.params);
       delete this.props.params;
       this.store.get();
+      return false;
     }
   }
   render() {

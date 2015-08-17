@@ -23,7 +23,8 @@ export class ReactItemButton extends ReactBase {
 export class ReactItemButtons extends ReactBase {
   static defaultProps = {
     items: [],
-    max: 10
+    max: 10,
+    id: 0
   }
   static propTypes = {
     items: React.PropTypes.array.isRequired,

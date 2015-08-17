@@ -44,8 +44,8 @@ var ReactCollection = (function (_ReactBase) {
   _createClass(ReactCollection, [{
     key: 'update',
     value: function update(data) {
+      this.store.maj(data);
       this.setState({ items: data });
-      this.store.setItems(data);
     }
   }, {
     key: 'componentDidMount',
@@ -84,6 +84,7 @@ var ReactCollection = (function (_ReactBase) {
     key: 'defaultProps',
     value: {
       items: [],
+      buttons: [],
       max: 10
     },
     enumerable: true
@@ -91,7 +92,8 @@ var ReactCollection = (function (_ReactBase) {
     key: 'propTypes',
     value: {
       items: _react2['default'].PropTypes.array.isRequired,
-      max: _react2['default'].PropTypes.number.isRequired
+      max: _react2['default'].PropTypes.number.isRequired,
+      buttons: _react2['default'].PropTypes.array.isRequired
     },
     enumerable: true
   }]);

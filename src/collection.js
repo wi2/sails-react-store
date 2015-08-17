@@ -6,19 +6,21 @@ import {StoreCollection} from 'sails-store'
 export default class ReactCollection extends ReactBase {
   static defaultProps = {
     items: [],
+    buttons: [],
     max: 10
   }
   static propTypes = {
     items: React.PropTypes.array.isRequired,
-    max: React.PropTypes.number.isRequired
+    max: React.PropTypes.number.isRequired,
+    buttons: React.PropTypes.array.isRequired
   }
   state = {
     items: this.props.items
   }
 
   update(data){
+    this.store.maj(data);
     this.setState({items: data});
-    this.store.setItems(data);
   }
 
   componentDidMount() {

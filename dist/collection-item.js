@@ -38,7 +38,6 @@ var ReactItem = (function (_ReactBase) {
   _createClass(ReactItem, [{
     key: 'update',
     value: function update(data) {
-      this.store.setItems(data);
       this.forceUpdate();
     }
   }, {
@@ -55,11 +54,12 @@ var ReactItem = (function (_ReactBase) {
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
+    value: function componentDidUpdate(prevProps, prevState) {
       if (this.props.params) {
-        this.store.setItems(this.props.params);
+        this.store.update(this.props.params);
         delete this.props.params;
         this.store.get();
+        return false;
       }
     }
   }, {
