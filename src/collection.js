@@ -19,8 +19,7 @@ export default class ReactCollection extends ReactBase {
   }
 
   update(data){
-    this.store.maj(data);
-    this.setState({items: data});
+    this.forceUpdate()
   }
 
   componentDidMount() {
@@ -34,9 +33,10 @@ export default class ReactCollection extends ReactBase {
     this.store.on('remove', this.update.bind(this));
     this.store.on('update', this.update.bind(this));
   }
-  shouldComponentUpdate(props, state) {
-    return props !== state
-  }
+  // shouldComponentUpdate(props, state) {
+  //   console.log("--->", props, state.items !== this.store.value.data)
+  //   return state.items !== this.store.value.data
+  // }
   render() {
     var Item = this.reactItem||ReactItem;
     let items = this.store ? this.store.value : this.props.items;

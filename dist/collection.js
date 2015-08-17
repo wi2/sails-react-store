@@ -44,8 +44,7 @@ var ReactCollection = (function (_ReactBase) {
   _createClass(ReactCollection, [{
     key: 'update',
     value: function update(data) {
-      this.store.maj(data);
-      this.setState({ items: data });
+      this.forceUpdate();
     }
   }, {
     key: 'componentDidMount',
@@ -61,12 +60,12 @@ var ReactCollection = (function (_ReactBase) {
       this.store.on('update', this.update.bind(this));
     }
   }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(props, state) {
-      return props !== state;
-    }
-  }, {
     key: 'render',
+
+    // shouldComponentUpdate(props, state) {
+    //   console.log("--->", props, state.items !== this.store.value.data)
+    //   return state.items !== this.store.value.data
+    // }
     value: function render() {
       var _this = this;
 

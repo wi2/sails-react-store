@@ -54,26 +54,23 @@ describe('collection testing', function() {
 
     it('should have 4 instances of item', function() {
       items.pop();
-      collectionComponent.update(items, function(){
-        var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
-        assert.equal(len, 4);
-      });
+      collectionComponent.store.update(items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
+      assert.equal(len, 4);
     });
 
     it('should have 3 instances of item', function() {
       items.pop();
-      collectionComponent.update(items, function(){
-        var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
-        assert.equal(len, 3);
-      });
+      collectionComponent.store.update(items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
+      assert.equal(len, 3);
     });
 
     it('should have 4 instances of item', function() {
       items.push({name:"James", id:6});
-      collectionComponent.update(items, function(){
-        var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
-        assert.equal(len, 4);
-      });
+      collectionComponent.store.update(items);
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
+      assert.equal(len, 4);
     });
 
     it('should have 6 instances of item', function() {
@@ -97,6 +94,16 @@ describe('collection testing', function() {
       var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
       assert.equal(len, 5);
     });
+    it('should have 6 instances of item', function() {
+      collectionComponent.store.onChange({verb: 'created', data: {name:"Victor", id:10}});
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
+      assert.equal(len, 6);
+    });
+    it('should have 5 instances of item', function() {
+      collectionComponent.store.onChange({verb: 'destroyed', id:10});
+      var len = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item).length;
+      assert.equal(len, 5);
+    });
 
   });
   describe('comment', function() {
@@ -111,9 +118,11 @@ describe('collection testing', function() {
     it('should change first item to Mike', function() {
       var item1 = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
       item1.store.onChange({verb: 'updated', id: item1.store.value.id, data: {name:"Mike"}});
+      item1 = TestUtils.scryRenderedComponentsWithType(collectionComponent, Item)[0];
       var name = React.findDOMNode(item1).textContent;
       assert.equal(name, 'Mike');
     });
+
 
     it('classname should equal to post-list', function() {
       shallowRenderer.render(swcollectionComponent);
