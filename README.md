@@ -19,9 +19,20 @@ export class PostItem extends ReactItem {
   render() {
     return (
       <div className="post">
-        <h5 className="post-title">{this.props.item.title}</h5>
-        <p className="post-content">{this.props.item.content}</p>
+        <h5 className="post-title">{this.state.item.title}</h5>
+        <p className="post-content">{this.state.item.content}</p>
       </div>
+    )
+  }
+}
+
+//
+//
+
+class Item {
+  render() {
+    return (
+      <span className="doc-title">{this.props.item.title}</span>
     )
   }
 }
@@ -30,13 +41,9 @@ export class PostCollection extends ReactItem {
   render() {
     return (
       <div className="posts">
-        {this.props.items.map((function(item,i) {
-          return <PostItem
-            identity={this.props.identity}
-            key={i}
-            item={item}
-            belongs={this.store} />;
-        }).bind(this))}
+        {this.state.items.map( (item,i) => {
+          return <Item item={item} key={i} />;
+        })}
       </div>
     )
   }
