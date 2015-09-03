@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactBase from './base.js'
-import ReactItem from './collection-item.js'
+import ReactCollectionItem from './collection-item.js'
 import {StoreCollection} from 'sails-store'
 
 export default class ReactCollection extends ReactBase {
@@ -19,27 +19,34 @@ export default class ReactCollection extends ReactBase {
   }
 
   update(data){
-    this.forceUpdate()
+    this.setState({items: data})
   }
 
-  componentDidMount() {
-    this.store = new StoreCollection({
-      identity: this.props.identity
-    });
+  storage() {
+    if (!this.store) {
+      this.store = new StoreCollection({
+        identity: this.props.identity
+      });
 
-    this.store.get();
-    //
-    this.store.on('add', this.update.bind(this));
-    this.store.on('remove', this.update.bind(this));
-    this.store.on('update', this.update.bind(this));
+      this.store.get();
+      //
+      this.store.on('add', this.update.bind(this));
+      this.store.on('remove', this.update.bind(this));
+      this.store.on('update', this.update.bind(this));
+    }
   }
 
+  componentDidMount(props) {
+    this.storage();
+  }
+  componentWillUpdate(prevProps, prevState) {
+    this.storage();
+  }
   render() {
-    var Item = this.reactItem||ReactItem;
-    let items = this.store ? this.store.value : this.props.items;
+    var Item = this.ReactCollectionItem||ReactCollectionItem;
     return (
       <ul className={this.props.identity+'-list'}>
-        {items.map( (item,i) => {
+        {this.state.items.map( (item,i) => {
           return <Item identity={this.props.identity} key={i} item={item} buttons={this.props.buttons} belongs={this.belongs} />;
         })}
       </ul>

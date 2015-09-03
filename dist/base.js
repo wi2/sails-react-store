@@ -28,9 +28,12 @@ var ReactBase = (function (_React$Component) {
   _inherits(ReactBase, _React$Component);
 
   _createClass(ReactBase, [{
-    key: 'componentDidUnmount',
-    value: function componentDidUnmount() {
-      this.store.stopListening();
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.store) {
+        this.store.stopListening();
+        delete this.store;
+      }
     }
   }, {
     key: 'render',

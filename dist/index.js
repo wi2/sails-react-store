@@ -27,11 +27,17 @@ Object.defineProperty(exports, 'ReactItemButtons', {
   }
 });
 
+var _itemJs = require('./item.js');
+
+var _itemJs2 = _interopRequireDefault(_itemJs);
+
+exports.ReactItem = _itemJs2['default'];
+
 var _collectionItemJs = require('./collection-item.js');
 
 var _collectionItemJs2 = _interopRequireDefault(_collectionItemJs);
 
-exports.ReactItem = _collectionItemJs2['default'];
+exports.ReactCollectionItem = _collectionItemJs2['default'];
 
 var _collectionJs = require('./collection.js');
 

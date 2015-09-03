@@ -22,89 +22,102 @@ var _baseJs = require('./base.js');
 
 var _baseJs2 = _interopRequireDefault(_baseJs);
 
-var _collectionItemJs = require('./collection-item.js');
-
-var _collectionItemJs2 = _interopRequireDefault(_collectionItemJs);
+var _itemButtonJs = require('./item-button.js');
 
 var _sailsStore = require('sails-store');
 
-var ReactCollection = (function (_ReactBase) {
-  function ReactCollection() {
-    _classCallCheck(this, ReactCollection);
+var ReactItem = (function (_ReactBase) {
+  function ReactItem() {
+    _classCallCheck(this, ReactItem);
 
-    _get(Object.getPrototypeOf(ReactCollection.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(ReactItem.prototype), 'constructor', this).apply(this, arguments);
 
     this.state = {
-      items: this.props.items
+      item: this.props.item || {}
     };
   }
 
-  _inherits(ReactCollection, _ReactBase);
+  _inherits(ReactItem, _ReactBase);
 
-  _createClass(ReactCollection, [{
+  _createClass(ReactItem, [{
     key: 'update',
     value: function update(data) {
-      this.setState({ items: data });
+      if (data !== this.state.item) {
+        this.setState({ item: data });
+      }
     }
   }, {
     key: 'storage',
     value: function storage() {
+      var item = this.props.params ? this.props.params : this.props.item;
+      delete this.props.params;
       if (!this.store) {
-        this.store = new _sailsStore.StoreCollection({
-          identity: this.props.identity
+        this.store = new _sailsStore.StoreItem({
+          identity: this.props.identity,
+          value: item,
+          belongs: this.props.belongs
         });
-
-        this.store.get();
-        //
-        this.store.on('add', this.update.bind(this));
-        this.store.on('remove', this.update.bind(this));
+        this.store.startListening();
         this.store.on('update', this.update.bind(this));
       }
+      if (!item.createdAt) this.store.get();
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount(props) {
+    value: function componentDidMount() {
       this.storage();
     }
   }, {
     key: 'componentWillUpdate',
-    value: function componentWillUpdate(prevProps, prevState) {
+    value: function componentWillUpdate() {
       this.storage();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.store) {
+        this.store.stopListening();
+        delete this.store;
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this = this;
-
-      var Item = this.ReactCollectionItem || _collectionItemJs2['default'];
+      var item = this.state.item;
       return _react2['default'].createElement(
-        'ul',
-        { className: this.props.identity + '-list' },
-        this.state.items.map(function (item, i) {
-          return _react2['default'].createElement(Item, { identity: _this.props.identity, key: i, item: item, buttons: _this.props.buttons, belongs: _this.belongs });
-        })
+        'li',
+        { className: this.props.identity + '-item' },
+        _react2['default'].createElement(
+          'p',
+          null,
+          item.message
+        ),
+        _react2['default'].createElement(
+          'small',
+          null,
+          item.name
+        ),
+        _react2['default'].createElement(_itemButtonJs.ReactItemButtons, { items: this.props.buttons, id: item.id })
       );
     }
   }], [{
     key: 'defaultProps',
     value: {
-      items: [],
-      buttons: [],
-      max: 10
+      item: {},
+      buttons: []
     },
     enumerable: true
   }, {
     key: 'propTypes',
     value: {
-      items: _react2['default'].PropTypes.array.isRequired,
-      max: _react2['default'].PropTypes.number.isRequired,
+      item: _react2['default'].PropTypes.object.isRequired,
       buttons: _react2['default'].PropTypes.array.isRequired
     },
     enumerable: true
   }]);
 
-  return ReactCollection;
+  return ReactItem;
 })(_baseJs2['default']);
 
-exports['default'] = ReactCollection;
+exports['default'] = ReactItem;
 module.exports = exports['default'];

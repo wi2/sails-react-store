@@ -24,46 +24,19 @@ var _baseJs2 = _interopRequireDefault(_baseJs);
 
 var _itemButtonJs = require('./item-button.js');
 
-var _sailsStore = require('sails-store');
+var ReactCollectionItem = (function (_ReactBase) {
+  function ReactCollectionItem() {
+    _classCallCheck(this, ReactCollectionItem);
 
-var ReactItem = (function (_ReactBase) {
-  function ReactItem(props) {
-    _classCallCheck(this, ReactItem);
-
-    _get(Object.getPrototypeOf(ReactItem.prototype), 'constructor', this).call(this, props);
-    var item = this.props.params ? this.props.params : this.props.item;
-
-    this.store = new _sailsStore.StoreItem({
-      identity: this.props.identity,
-      value: item,
-      belongs: this.props.belongs
-    });
-    this.store.startListening();
-    this.store.on('update', this.update.bind(this));
-    if (!item.createdAt) this.store.get();
+    _get(Object.getPrototypeOf(ReactCollectionItem.prototype), 'constructor', this).apply(this, arguments);
   }
 
-  _inherits(ReactItem, _ReactBase);
+  _inherits(ReactCollectionItem, _ReactBase);
 
-  _createClass(ReactItem, [{
-    key: 'update',
-    value: function update(data) {
-      this.forceUpdate();
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (this.props.params) {
-        this.store.update(this.props.params);
-        delete this.props.params;
-        this.store.get();
-        return false;
-      }
-    }
-  }, {
+  _createClass(ReactCollectionItem, [{
     key: 'render',
     value: function render() {
-      var item = this.store ? this.store.value : this.props.item;
+      var item = this.props.item;
       return _react2['default'].createElement(
         'li',
         { className: this.props.identity + '-item' },
@@ -80,24 +53,10 @@ var ReactItem = (function (_ReactBase) {
         _react2['default'].createElement(_itemButtonJs.ReactItemButtons, { items: this.props.buttons, id: item.id })
       );
     }
-  }], [{
-    key: 'defaultProps',
-    value: {
-      item: {},
-      buttons: []
-    },
-    enumerable: true
-  }, {
-    key: 'propTypes',
-    value: {
-      item: _react2['default'].PropTypes.object.isRequired,
-      buttons: _react2['default'].PropTypes.array.isRequired
-    },
-    enumerable: true
   }]);
 
-  return ReactItem;
+  return ReactCollectionItem;
 })(_baseJs2['default']);
 
-exports['default'] = ReactItem;
+exports['default'] = ReactCollectionItem;
 module.exports = exports['default'];
