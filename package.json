@@ -1,6 +1,6 @@
 {
   "name": "sails-react-store",
-  "version": "1.0.1",
+  "version": "1.0.9",
   "description": "React view isomorph with socket.io for sailsjs ",
   "scripts": {
     "test": "npm run prepublish && mocha --compilers js:babel-core/register test/test-*.js",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "react": "^0.13.3",
-    "sails-store": "^1.0.1"
+    "sails-store": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",

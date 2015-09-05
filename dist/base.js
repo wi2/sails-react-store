@@ -38,12 +38,12 @@ var ReactBase = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement('div', { className: this.props.identity + '-section' });
+      return _react2['default'].createElement('div', { className: (this.props.identity || 'div') + '-section' });
     }
   }], [{
     key: 'propTypes',
     value: {
-      identity: _react2['default'].PropTypes.string.isRequired
+      identity: _react2['default'].PropTypes.string
     },
     enumerable: true
   }]);

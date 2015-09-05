@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class ReactBase extends React.Component {
   static propTypes = {
-    identity: React.PropTypes.string.isRequired
+    identity: React.PropTypes.string
   }
   componentWillUnmount() {
     if (this.store) {
@@ -11,6 +11,6 @@ export default class ReactBase extends React.Component {
     }
   }
   render(){
-    return <div className={this.props.identity+'-section'}></div>
+    return <div className={(this.props.identity||'div')+'-section'}></div>
   }
 }

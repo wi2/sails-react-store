@@ -37,7 +37,7 @@ class Item {
   }
 }
 
-export class PostCollection extends ReactItem {
+export class PostCollection extends ReactCollection {
   render() {
     return (
       <div className="posts">
@@ -53,16 +53,16 @@ export class PostCollection extends ReactItem {
 ```
 and use like that
 when no attributes items => get request /post
-```
+```js
 <PostCollection identity="post" />
 
 ```
 or if you want to add manually items
-```
+```js
 <PostCollection identity="post" items={[]} />
 ```
 ### for one record
-```
+```js
 <PostItem identity="post" item={{title:'a title', content: 'a text content'}} />
 
 ```

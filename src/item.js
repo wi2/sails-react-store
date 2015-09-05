@@ -16,35 +16,45 @@ export default class ReactItem extends ReactBase {
     item: this.props.item||{}
   }
 
-  update(data){
-    if (data !== this.state.item) {
-      this.setState({item: data})
-    }
-  }
-
-  storage() {
-    let item = this.props.params ? this.props.params : this.props.item;
-    delete this.props.params;
-    if (!this.store) {
-      this.store = new StoreItem({
-        identity: this.props.identity,
-        value: item,
-        belongs: this.props.belongs
-      });
-      this.store.startListening();
-      this.store.on('update', this.update.bind(this));
-    }
-    if (!item.createdAt)
+  shouldComponentUpdate(newProps, newState) {
+    if (newProps.params) {
+      this.deleteStore();
+      this.createStore(newProps.identity, newProps.params)
       this.store.get();
+      delete this.props.params;
+      return false;
+    }
+    return true;
   }
-
   componentDidMount() {
-    this.storage();
+    if (this.props.params && this.props.item && !this.props.item.id)
+      this.setState(this.props.params);
+    else
+      this.storage()
   }
   componentWillUpdate() {
     this.storage();
   }
   componentWillUnmount() {
+    this.deleteStore();
+  }
+
+  update(data){
+    if (data !== this.state.item) this.setState({item: data})
+  }
+  storage() {
+    let item = this.state.item;
+    this.createStore(this.props.identity, item)
+    if (!item.createdAt) this.store.get();
+  }
+  createStore(identity, value) {
+    if (!this.store) {
+      this.store = new StoreItem({identity, value});
+      this.store.startListening();
+      this.store.on('update', this.update.bind(this));
+    }
+  }
+  deleteStore() {
     if (this.store) {
       this.store.stopListening();
       delete this.store;
